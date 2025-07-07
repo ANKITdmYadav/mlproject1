@@ -25,6 +25,7 @@ var/
 MANIFEST
 
 # Virtual environment
+.artifacts
 venv/
 ENV/
 env/
