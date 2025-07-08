@@ -26,6 +26,8 @@ MANIFEST
 
 # Virtual environment
 .artifacts
+artifacts/
+.artifacts/
 venv/
 ENV/
 env/
