@@ -1,12 +1,17 @@
+#                       FROM HERE WE ARE RUNNING "data_transformation.py"
+
 import os,sys
-from src.exception import CustomException
-from src.logger import logging
 import pandas as pd
 
 
 from sklearn.model_selection import train_test_split
-
 from dataclasses import dataclass
+
+from src.exception import CustomException
+from src.logger import logging
+from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import DataTransformationConfig
+
 
 @dataclass
 class DataIngestionConfig:
@@ -19,12 +24,13 @@ class DataIngestion:
         self.ingestion_config=DataIngestionConfig()
 
     def initiate_data_ingestion(self):
-        # this function reads from mongodb,hadoop etc
+        # this function reads from mongodb,hadoop etc but we will be doing easy
         logging.info("Entered the data ingestion method or component")
         try:
             df=pd.read_csv('notebook\data\stud.csv')
             logging.info('Read the Dataset as datafram')
 
+            # it will make multiple directories like first creates artifacts then train_data_path file
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
 
             df.to_csv(self.ingestion_config.raw_data_path,index=False,header=True)
@@ -49,4 +55,10 @@ class DataIngestion:
 
 if __name__=="__main__":
     obj=DataIngestion()
-    obj.initiate_data_ingestion()
+    train_data,test_data=obj.initiate_data_ingestion()
+
+# to call data_transformation.py get class var and the call whole func
+# from here we can run data_transformatio
+    data_transformation=DataTransformation()
+    data_transformation.initiate_data_transformation(train_data,test_data)
+
