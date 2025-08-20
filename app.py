@@ -19,6 +19,7 @@ def predict_datapoint():
     if request.method=='GET':
         return render_template('home.html')
     else:
+        # this customData present in pipeline
         data=CustomData(
             gender=request.form.get('gender'),
             race_ethnicity=request.form.get('ethnicity'),

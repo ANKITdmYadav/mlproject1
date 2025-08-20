@@ -3,6 +3,8 @@ import pandas as pd
 from src.exception import CustomException
 from src.utils import load_object
 
+#               FOR TAKING INPUT FROM WEB PAGE 
+
 class PredictPipeline:
     def __init__(self):
         pass
@@ -11,6 +13,7 @@ class PredictPipeline:
         try:
             model_path=os.path.join("artifacts","model.pkl")
             preprocessor_path=os.path.join('artifacts','preprocessor.pkl')
+    # this load_object is present in src->utils.py
             model=load_object(file_path=model_path)
             preprocessor=load_object(file_path=preprocessor_path)
             data_scaled=preprocessor.transform(features)
